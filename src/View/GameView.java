@@ -109,6 +109,7 @@ public class GameView extends Pane{
 
         nameField.setOnAction(event -> {
             player.setName(nameField.getText());
+            Score.writeHighScore(player);
             removeNameScreen();
         });
 
