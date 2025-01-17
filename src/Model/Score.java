@@ -17,8 +17,8 @@ public class Score {
     public static void writeHighScore(Player player){
         Path path = Paths.get("Score.java").toAbsolutePath().getParent();
         String pathToFile=String.valueOf(path);
-        pathToFile = pathToFile+"/resources/HighScore.txt";
-        String score = String.valueOf(player.getCurrentScore());
+        pathToFile = pathToFile+"/src/resources/HighScore.txt";
+        String score = ""+(long)(player.getCurrentScore());
         String name = player.getName();
         try{
             FileWriter highScoreWrite = new FileWriter(pathToFile, true);
@@ -33,7 +33,7 @@ public class Score {
     public static void readHighScore(){
         Path path = Paths.get("Score.java").toAbsolutePath().getParent();
         String pathToFile=String.valueOf(path);
-        pathToFile = pathToFile+"/resources/HighScore.txt";
+        pathToFile = pathToFile+"/src/resources/HighScore.txt";
         try{
             String highscores = Files.readString(Paths.get(pathToFile)); //this line is the problem
             String dividers = "\n";

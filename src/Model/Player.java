@@ -2,10 +2,10 @@ package Model;
 
 public class Player {
 
-    private double currentscore;
-    private double highscore;
+    private long currentscore;
+    private long highscore;
     private int lives;
-    private int maxlives;
+    private int maxLives;
     private boolean isAlive;
     private int level;
     private String name;
@@ -13,7 +13,7 @@ public class Player {
     public Player() {
         this.currentscore = 0;
         this.highscore = 0;
-        this.maxlives = 3;
+        this.maxLives = 3;
         this.lives = 3;
         isAlive = true;
         this.level = 1;
@@ -26,16 +26,16 @@ public class Player {
     }
 
     public void addLives(int extra) {
-        if (this.lives == this.maxlives) {
+        if (this.lives == this.maxLives) {
             this.lives += extra;
-            this.maxlives += extra;
+            this.maxLives += extra;
         } else {
             this.lives++;
         }
     }
 
     public void fullHP(int lives) {
-        this.lives = this.maxlives;
+        this.lives = this.maxLives;
     }
 
     public void updateCurrentScore(double points) { //Skal fungere sammen med blocks.
@@ -51,7 +51,9 @@ public class Player {
     // Getters Setters & Adders
     public double getCurrentScore() { return currentscore; }
     public double getHighscore() { return highscore; }
+
     public int getLives() { return lives; }
+    public int getMaxLives() { return maxLives; }
     public void setLives(int lives) { this.lives = lives; }
     public void removeLive() { this.lives--; } // Stavet forkert
     public void setName(String name) { this.name = name; }

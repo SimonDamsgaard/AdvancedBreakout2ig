@@ -77,7 +77,7 @@ public class GameView extends Pane{
     public void initializeHUD(){
         HUDBackground = new Rectangle(0,0, sceneWidth, sceneHeight*0.03);
         HUDBackground.setFill(Color.WHITE);
-        lives = new Text(sceneWidth*0.9, 24,"Lives: " + (player.getLives()));
+        lives = new Text(sceneWidth*0.9, 24, player.getLives()+"/"+player.getMaxLives());
         lives.setFill(Color.BLACK);
         level = new Text(sceneWidth*0.4,24,"Level: " + (player.getLevel()));
         score = new Text(0,24,"Score: " + (int)(player.getCurrentScore()));
@@ -88,9 +88,9 @@ public class GameView extends Pane{
     }
 
     public void updateHUD() {
-        lives.setText("Lives: " + (player.getLives()));
+        lives.setText("Lives: " + player.getLives()+"/"+player.getMaxLives());
         level.setText("Level: " + (player.getLevel()));
-        score.setText("Score " + (int)(player.getCurrentScore()));
+        score.setText("Score " + (long)(player.getCurrentScore()));
     }
 
     // De her overlays skal lige gennemgås men er sgu for træt rn, men tænker man kan lave et style sheet eller lign, det hele skal bare organiseres
@@ -127,6 +127,7 @@ public class GameView extends Pane{
     }
 
     public void initializeDeathScreen(double sceneWidth, double sceneHeight) {
+        Score.writeHighScore(player);
         Text deathMsg = new Text("You died.");
         deathMsg.setStyle("-fx-font-size: 36px; -fx-fill: white;");
         Text deathScore = new Text("Score " + player.getName()+": "+(int)(player.getCurrentScore()));
