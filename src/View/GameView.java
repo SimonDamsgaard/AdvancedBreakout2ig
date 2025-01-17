@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -36,6 +37,7 @@ public class GameView extends Pane{
     private Text lives;
     private Text level;
     private Text score;
+    private Text playerName;
     private Rectangle HUDBackground;
 
     public GameView (){
@@ -77,17 +79,20 @@ public class GameView extends Pane{
     public void initializeHUD(){
         HUDBackground = new Rectangle(0,0, sceneWidth, sceneHeight*0.03);
         HUDBackground.setFill(Color.WHITE);
-        lives = new Text(sceneWidth*0.9, 24, "Lives: " + player.getLives()+"/"+player.getMaxLives());
+        lives = new Text(sceneWidth*0.75, 24, "Lives: " + player.getLives()+"/"+player.getMaxLives());
         lives.setFill(Color.BLACK);
-        level = new Text(sceneWidth*0.4,24,"Level: " + (player.getLevel()));
-        score = new Text(0,24,"Score: " + (int)(player.getCurrentScore()));
+        level = new Text(sceneWidth*0.5,24,"Level: " + (player.getLevel()));
+        score = new Text(sceneWidth*0.25,24,"Score: " + (int)(player.getCurrentScore()));
+        playerName = new Text(2,24,player.getName());
+        playerName.setStyle("-fx-font-size: 24px;");
         lives.setStyle("-fx-font-size: 24px;");
         level.setStyle("-fx-font-size: 24px;");
         score.setStyle("-fx-font-size: 24px;");
-        getChildren().addAll(HUDBackground, lives, level, score);
+        getChildren().addAll(HUDBackground, playerName, lives, level, score);
     }
 
     public void updateHUD() {
+        playerName.setText(player.getName());
         lives.setText("Lives: " + player.getLives()+"/"+player.getMaxLives());
         level.setText("Level: " + (player.getLevel()));
         score.setText("Score " + (long)(player.getCurrentScore()));
@@ -106,6 +111,14 @@ public class GameView extends Pane{
         nameField.setMaxWidth(sceneWidth / 5);   
         nameField.setMinWidth(sceneWidth / 5);
 
+        int maxLength = 5;
+
+        nameField.setTextFormatter(new TextFormatter<String>(change -> {
+            if (change.getControlNewText().length() > maxLength) {
+                return null; // Reject the change if it exceeds the limit
+            }
+            return change; // Accept the change otherwise
+        }));
 
         nameField.setOnAction(event -> {
             player.setName(nameField.getText());

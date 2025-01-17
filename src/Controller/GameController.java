@@ -11,7 +11,7 @@ public class GameController {
     private GameView gameView;
     private Scene scene;
     static Timeline gameplay;
-    static boolean gameRunning = false;
+    private boolean gameRunning = false;
     private Ball ball;
 
     public GameController(GameView gameView, Scene scene) {
@@ -118,7 +118,7 @@ public class GameController {
     public void rightPressed() { gameView.getPlatform().setMovingRight(true); }
     public void leftReleased() { gameView.getPlatform().setMovingLeft(false); }
     public void rightReleased() { gameView.getPlatform().setMovingRight(false); }
-    public static void spacePressed() {
+    public void spacePressed() {
         if (!gameRunning) {
             gameplay.play();  
             gameRunning = true;
