@@ -77,7 +77,7 @@ public class GameView extends Pane{
     public void initializeHUD(){
         HUDBackground = new Rectangle(0,0, sceneWidth, sceneHeight*0.03);
         HUDBackground.setFill(Color.WHITE);
-        lives = new Text(sceneWidth*0.9, 24, player.getLives()+"/"+player.getMaxLives());
+        lives = new Text(sceneWidth*0.9, 24, "Lives: " + player.getLives()+"/"+player.getMaxLives());
         lives.setFill(Color.BLACK);
         level = new Text(sceneWidth*0.4,24,"Level: " + (player.getLevel()));
         score = new Text(0,24,"Score: " + (int)(player.getCurrentScore()));
