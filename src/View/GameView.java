@@ -226,14 +226,18 @@ public class GameView extends Pane{
 
     public void newLevel() {
         player.levelUp();
+        upgradeScreen.setVisible(false);
+        upgradeTitle.setVisible(false);
+
+        if (killIfDead()) {
+            return;
+        }
+
         updateHUD();
         blockList = Model.GenerateBlocks.generateBlocks(player.getLevel());
         for (int i = 0; i < blockList.size(); i++){
             getChildren().add(blockList.get(i));
         }
-
-        upgradeScreen.setVisible(false);
-        upgradeTitle.setVisible(false);
 
         platform.reset();
         ball.reset(platform);
@@ -244,6 +248,15 @@ public class GameView extends Pane{
         ball.reset(platform);
     }
     
+    public boolean killIfDead() {
+        if (getPlayer().getLives() <= 0) {
+            initializeDeathScreen(getWidth(), getHeight());
+            deathScreenShow();
+            return true;
+        }
+        return false;
+    }
+
     public Platform getPlatform() { return platform; }
     public Ball getBall() { return ball; }
     public ArrayList<Block> getBlockList() { return blockList; }

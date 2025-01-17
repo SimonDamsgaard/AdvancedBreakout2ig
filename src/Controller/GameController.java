@@ -69,12 +69,8 @@ public class GameController {
             gameView.updateHUD();
 
             // Checks Player life to se if game continous
-            if (gameView.getPlayer().getLives() <= 0) {
-                
-                gameView.initializeDeathScreen(gameView.getWidth(), gameView.getHeight());
-                gameView.deathScreenShow();
+            if (gameView.killIfDead()) {
             } else {
-
                 gameView.lifeLost();
             }
 
